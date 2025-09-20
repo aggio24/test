@@ -17,7 +17,7 @@ preloader.style.top = "0";
 preloader.style.left = "0";
 preloader.style.right = "0";
 preloader.style.bottom = "0";
-preloader.style.backgroundColor = "#0B192E";
+preloader.style.backgroundColor = "#B848FF";
 preloader.style.fontFamily = "'Poppins', Arial, sans-serif";
 preloader.style.display = "flex";
 preloader.style.alignItems = "center";
@@ -164,4 +164,5 @@ function enableAllButtons() {
         el.disabled = false;
         el.style.opacity = "1";
     });
+
 }
