@@ -1,5 +1,6 @@
 <?php
-error_reporting(0);
+@error_reporting(0);
+@ini_set('display_errors', 0);
 @session_start();
 header('Content-Type: text/html; charset=utf-8');
 
@@ -117,10 +118,8 @@ foreach ($items as $item) {
     $full = $path . DIRECTORY_SEPARATOR . $item;
     $isDir = is_dir($full);
     
-    // Boyut hesaplama
-    $size = $isDir ? "-" : round(filesize($full) / 1024, 2) . " KB";
-    // Tarih hesaplama
-    $date = date("d.m.Y H:i", filemtime($full));
+    $size = $isDir ? "-" : round(@filesize($full) / 1024, 2) . " KB";
+    $date = date("d.m.Y H:i", @filemtime($full));
 
     echo "<tr><td style='padding:8px;'>" . ($isDir ? "<b>[DIR]</b> <a href='?path=".urlencode($full)."'>$item</a>" : "<b>[FILE]</b> $item") . "</td>";
     echo "<td style='padding:8px;'>$size</td>";
